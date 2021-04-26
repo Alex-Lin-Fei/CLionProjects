@@ -1,0 +1,3 @@
+/home/lilin/CLionProjects/TheC++ProgrammingLanguage/ch06/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/lilin/CLionProjects/TheC++ProgrammingLanguage/ch06/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/lilin/CLionProjects/TheC++ProgrammingLanguage/ch06/cmake-build-debug/CMakeFiles/ch06.dir

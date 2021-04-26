@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/56.dir/main.cpp.o  -o 56 

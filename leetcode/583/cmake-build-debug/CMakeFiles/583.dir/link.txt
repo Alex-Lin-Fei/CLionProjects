@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/583.dir/main.cpp.o  -o 583 

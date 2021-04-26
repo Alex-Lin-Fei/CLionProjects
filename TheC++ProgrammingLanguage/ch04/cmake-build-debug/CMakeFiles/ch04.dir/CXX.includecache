@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lilin/CLionProjects/TheC++ProgrammingLanguage/ch04/main.cpp
+iostream
+-
+unordered_map
+-
+map
+-
+list
+-
+cstring
+-
+vector
+-
+algorithm
+-
+

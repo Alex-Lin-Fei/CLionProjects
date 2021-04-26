@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/300.dir/main.cpp.o  -o 300 

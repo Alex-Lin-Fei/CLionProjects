@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/542.dir/main.cpp.o  -o 542 
