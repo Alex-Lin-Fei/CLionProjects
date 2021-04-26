@@ -1,0 +1,2 @@
+# CLionProjects
+linux + clion
