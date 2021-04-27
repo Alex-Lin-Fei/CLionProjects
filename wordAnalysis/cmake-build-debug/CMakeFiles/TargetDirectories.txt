@@ -1,0 +1,3 @@
+/home/lilin/文档/wordAnalysis/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/lilin/文档/wordAnalysis/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/lilin/文档/wordAnalysis/cmake-build-debug/CMakeFiles/wordAnalysis.dir

@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lilin/文档/wordAnalysis/main.cpp
+iostream
+-
+fstream
+-
+vector
+-
+map
+-
+cstring
+-
+
