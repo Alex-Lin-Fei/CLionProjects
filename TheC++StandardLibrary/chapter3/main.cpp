@@ -103,8 +103,8 @@ int main() {
     std::map<std::string, float> coll;
     decltype(8) elem;
     std::cout << typeid(elem).name() << std::endl;
-    MyClass<int, float> m{};
-    m.c = 9;
+    MyClass<int> m{};
+    m.c.push_back(1);
     std::cout << typeid(m.c).name()<<std::endl;
 
     return 0;
