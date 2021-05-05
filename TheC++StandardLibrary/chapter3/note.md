@@ -1,13 +1,16 @@
 #auto
 以auto声明的变量，其类型会根据其初值被自动推导，一定需要
-一个初始化操作
-auto i; //ERROR 
+一个初始化操作  
+```c++
+auto i; //ERROR   
+```
 如果类型很长或者表达式很复杂，auto非常有用
 
-#uniform initialization (参见function a) 
+#uniform initialization 
 面对任何初始化动作，可以使用相同的语法——大括号{}  
 某个local变量属于某种基础类型会被初始化为0/nullptr  
-narrowing 窄化——精度降低或者数值变动——对{}是不成立的(error)
+narrowing 窄化——精度降低或者数值变动——对{}是不成立的(error)  
+(参见function a)
 
 #initializer list
 提供class template std::initializer_list<>支持一系列值(a list of value)  
@@ -106,7 +109,7 @@ class C {
 };
 
 std::vector<std::string> vs;
-for (const C&elem: vs) { // explicit type conversion from strings
+for (const C&elem: vs) { // ERROR: explicit type conversion from strings
     std::cout << elem<<std::endl;
 }
 ```
@@ -160,7 +163,7 @@ void foo(X&&);
 ```c++
 void foo(X&&);
 ```
-而没有void foo(X&) 和 void foo(const X&)，则只可因value被调用
+而没有void foo(X&) 和 void foo(const X&)，则只可因rvalue被调用
 
 #noexcept
 关键字noexcept用来指明某个函数无法——或不打算抛出异常（page24)
