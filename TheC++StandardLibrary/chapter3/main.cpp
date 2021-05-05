@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <complex>
+#include <map>
 
 //3.1.2 uniform initialization initializer list
 void a() {
@@ -31,7 +32,7 @@ void a() {
 
 // print({1,2,3,4,5})
 void print(std::initializer_list<int> values) {
-    for (auto p=values.begin(); p != values.end(); ++p)
+    for (auto p = values.begin(); p != values.end(); ++p)
         std::cout << *p << '\n';
 }
 
@@ -40,9 +41,11 @@ public:
     P(int, int) {
         std::cout << "this is (int, int)\n";
     }
+
     P(std::initializer_list<int>) {
-    std::cout << "this is initializer list"<<std::endl;
+        std::cout << "this is initializer list" << std::endl;
     }
+
     ~P() {
         std::cout << "object destroyed\n";
     }
@@ -55,11 +58,34 @@ void foo(P p) {
 }
 
 void test() {
-    P p1{1,2};
+    P p1{1, 2};
     foo(p1);
 }
 
+//lambda capture
+void capture() {
+    int x = 0;
+    int y = 42;
+    x = y = 77;
 
+    auto qqq = [x, &y] {
+        std::cout << "x: " << x << std::endl;
+        std::cout << "y: " << y << std::endl;
+        ++y;
+    };
+    qqq();
+    qqq();
+    std::cout << "final x: " << x << std::endl;
+    std::cout << "final y: " << y << std::endl;
+}
+
+
+template<typename T, typename container = std::vector<T>>
+class MyClass {
+    T x;
+public:
+    container c;
+};
 
 int main() {
 //    P p(77,5);
@@ -67,10 +93,19 @@ int main() {
 //    P r{77,5, 3};
 //    P s = {77,5};
 
-    test();
-    constexpr int x = 10;
-    int url[x] = {0};
+//    test();
+//    constexpr int x = 10;
+//    int url[x] = {0};
 
+    capture();
+
+
+    std::map<std::string, float> coll;
+    decltype(8) elem;
+    std::cout << typeid(elem).name() << std::endl;
+    MyClass<int, float> m{};
+    m.c = 9;
+    std::cout << typeid(m.c).name()<<std::endl;
 
     return 0;
 }

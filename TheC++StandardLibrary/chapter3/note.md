@@ -196,6 +196,7 @@ std::vector<int, MyAlloc<int>> coll;
 ```
 
 #Lambda
+##语法
 所谓lambda是一份功能定义式，可被定义于语句(statement)和表达式(expression)  
 最小型的lambda函数没有参数，如下：
 ```c++
@@ -236,6 +237,116 @@ lambda也可以有返回值，但不需要指明返回类型，该类型会根�
 return 1;
 };
 ```
+##Capture
+在lambda introducer(开始的方括号内)，你可以指明一个capture用来处理外部作用域内未被传递为实参的数据  
++ = 意味着外部作用域以by value的方式传递给lambda，因此可以读取但不能改动
++ & 意味着外部作用域以by reference方式传递给lambda，因此拥有读写的权限
+也可以分别指明lambda之内你所访问的每一个对象是by value或by reference  
+```c++
+int x = 0;
+int y = 42;
+auto qqq = [x, &y] {
+    std::cout << "x: " << x << std::endl;
+    std::cout << "y: " << y << std::endl;
+    ++y;
+};
+x = y = 77;
+qqq();
+qqq();
+std::cout << "final y: " << y << std::endl;
+
+//console
+x: 0
+y: 77
+x:0
+y::78
+final y: 79
+```
+因为x获得的是一份拷贝（即0），在此lambda内部无法改动（如赋值，自增加自减等）  
+y获得的是引用，因此可以改变，其值会影响外部  
+为了获得passing by value 和passing by reference 的混合体，可以声明lambda为mutable  
+对象以by value的方式传递，在这个lambda内部可以改动它，但结果不会影响外部    
+```c++
+int id = 0;
+auto f = [id] () mutable {
+    std::cout << "id: " << id << std::endl;
+    ++id; //OK
+};
+id = 42;
+f();
+f();
+f();
+std::cout << id << std::endl;
+
+//console
+id: 0
+id: 1
+id: 2
+42
+```
+可以把上述lambda视为以下function object  
+```c++
+class {
+    private:
+    int id;
+    public:
+    void operator()() {
+        std::cout << "id: " << id << std::endl;
+        ++id;
+    }
+};
+```
+由于mutable的缘故，operator()()被定义为一个non-const成员函数，若没有mutable，operator()为一个const函数  
+
+##Lambda的类型  
+lambda的类型是个不具名的function object，每个lambda表达式的类型三独一无二的  
+可以使用std::function<>class template  
+```c++
+std::function<int(int, int)> returnLambda () {
+    return [](int x, int y) {
+        return x*y;
+    };
+}
+
+int main() {
+    auto lf = reurnLambda();
+    std::cout << lf(4,5) << std::endl; //20
+}
+```
+
+#关键字 decltype  
+参见page 32  
+#enum class  
+参见page 32  
+#Template  
+##Default Template Parameter  
+class template可以拥有默认实参，例如   
+```c++
+template <typename T, typename container = vector<T>>
+class MyClass;
+```
+如果只传入一个实参，则第二个实参采用默认值  
+```c++
+MyClass<int> x1;
+```
+详见page33
+#基础类型的明确初始化  
+如果使用了一个明确的构造函数调用但不给实参，基础类型会被设定为初值0  
+```c++
+int i; //undefined value
+int i2 = int(); //initialized with zero
+int i3{}; //initialized with zero
+```
+初始化机制确保了如果x为基础类型，则会被初始化为0  
+```c++
+template <typename T>
+void f() {
+    T x = T();
+}
+```
+如果template强迫设置初值0,即zero initialized，否则就是default initialized
+
+
 
 
 
