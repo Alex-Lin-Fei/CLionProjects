@@ -6,7 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/lilin/文档/testC/main.c
+/home/lilin/CLionProjects/testC/main.c
 stdio.h
+-
+stdio.h
+-
+string.h
 -
 

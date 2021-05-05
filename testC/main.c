@@ -1,3 +1,4 @@
+/*
 #include <stdio.h>
 
 int main() {
@@ -71,4 +72,47 @@ int main() {
 
     printf("Hello, World!\n");
     return 0;
+}
+*/
+
+
+#include <stdio.h>
+#include <string.h>
+/*
+void function(char * );
+int main() {
+    char large_string[256];
+
+    for (int i = 0; i < 255; i++) {
+        large_string[i] = 'A';
+    }
+    function(large_string);
+}
+
+void function(char* str) {
+    char buffer[16];
+    strcpy(buffer, str);
+}
+ */
+
+void function(int , int , int );
+int main() {
+//    int x = 0;
+//    function(1,2,3);
+//    x = 1;
+//    printf("%d\n", x);
+    int a[5] = {0};
+    printf("%d\n", a[3]);
+    3[a] = 1;
+    printf("%d\n", a[3]);
+
+    return 0;
+}
+
+void function(int a, int b, int c) {
+    char buffer1[5];
+    char buffer2[10];
+    int * r;
+    r = buffer1 + 12;
+    (*r) += 8;
 }
