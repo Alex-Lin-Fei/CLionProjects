@@ -325,9 +325,13 @@ class template可以拥有默认实参，例如
 template <typename T, typename container = vector<T>>
 class MyClass;
 ```
-如果只传入一个实参，则第二个实参采用默认值  
+如果只传入一个实参，则第二个实参采用默认值，即vector<T>  
 ```c++
-MyClass<int> x1;
+MyClass<int> x1; //<int, vector<int>>
+```
+反之
+```c++
+MyClass<int, float> x1; //<int, float>
 ```
 详见page33
 #基础类型的明确初始化  
