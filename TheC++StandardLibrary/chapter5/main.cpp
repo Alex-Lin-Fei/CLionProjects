@@ -1,5 +1,8 @@
 #include <iostream>
 #include <functional>
+#include <memory>
+#include <vector>
+using namespace std;
 
 void testTuple() {
     std::tuple<int, float, std::string> t(77, 1.1, "more light");
@@ -19,8 +22,38 @@ std::tuple<int> testInitializerList() {
     return {1};
 }
 
+void testSmartPoint() {
+    std::shared_ptr<std::string> pNico(new std::string("nico"));
+    std::shared_ptr<std::string> pJutta(new std::string("jutta"));
+
+    (*pNico)[0]= 'N';
+
+    vector<shared_ptr<string>> whoMadeCoffee;
+    whoMadeCoffee.push_back(pJutta);
+    whoMadeCoffee.push_back(pJutta);
+    whoMadeCoffee.push_back(pNico);
+    whoMadeCoffee.push_back(pJutta);
+    whoMadeCoffee.push_back(pNico);
+
+    for (auto ptr: whoMadeCoffee) {
+        cout << *ptr << ' ';
+    }
+
+    cout << endl;
+    *pNico = "Nicolai";
+
+    for (auto ptr: whoMadeCoffee) {
+        cout << *ptr << ' ';
+    }
+
+    cout << endl;
+
+    cout << "use_count: " << whoMadeCoffee[0].use_count() << endl;
+}
+
 int main() {
-testTuple();
+//testTuple();
+testSmartPoint();
 
     return 0;
 }
