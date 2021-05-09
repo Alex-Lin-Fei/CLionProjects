@@ -69,4 +69,96 @@ String
 + priority queue  
 
 #迭代器（iterator)  
+概念：以一个对象表现出容器元素的位置。  
+基本操作： 
++ operator *  
+返回当前位置的元素值  
+  
++ operator ++   
+令迭代器前进至下一元素，大多数迭代器还可使用operator--退至前一元素 
+  
++ operator == 和 != 判断迭代器是否指向同一位置  
++ operator = 对迭代器进行赋值（指明迭代器所指向的位置）  
+
+迭代器内部运作机制取决于其所遍历的数据结构，每一种容器都提供了自己的迭代器，事实上每一种容器的确都将其迭代器以嵌套  
+的方式定义于class内部，各种迭代器接口虽然相同，类型各不相同  
+所有容器类都提供一些基本的成员函数，最重要的有：
++ begin()返回一个迭代器，指向容器起点，也就是第一个元素位置  
++ end()返回一个迭代器，指向容器终点，位于最末元素的下一位置，又称为逾尾迭代器  
+于是begin()和end()形成了一个半开区间
+  
+任何容器都定义两种迭代器类型：  
++ container::iterator 以**读/写**模式遍历元素  
++ container::const_iterator 以**只读**模式遍历元素  
+**note**：前置式递增比后置式递增效率高，后者内部需要一个临时对象，因为它必须存放迭代器原本的位置并返回  
+  
+##cbegin() 和 cend()  
+自c++11开始，我们可以使用关键字auto代替迭代器的精确类型（前提是迭代器在声明期间就被初始化，使其类型可以取决于初值）  
+**优点**：  
++ 程序比较浓缩精简  
++ 万一容器类型有所改变，程序整体仍然能保持较佳健壮性  
+**缺点**：
++  会使得pos成为一个非常量迭代器，因为begin()返回的是类型为cont::iterator的对象  
+如下代码：
+```c++
+
+void testIterator() {
+    list<char> cls{'a', 'b', 'c', 'd'};
+
+    list<char>::const_iterator pos;
+    for (pos = cls.begin(); pos != cls.end(); pos++) {
+        *pos = *pos + 1; //ERROR
+        cout << *pos<<' ';
+    }
+    cout << endl;
+
+}
+```
+
+##关联式及无序式容器的实例  
+使用c++11之前的set  
+```c++
+
+int main() {
+typedef std::set<int> IntSet;
+
+IntSet coll;
+
+coll.insert(3);
+    coll.insert(1);
+    coll.insert(5);
+    coll.insert(4);
+    coll.insert(1);
+    coll.insert(6);
+    coll.insert(2);
+
+    IntSet::const_iterator pos;
+    for (pos = coll.begin(); pos != coll.end(); ++pos) {
+        cout << *pos<<' ';
+    }
+
+    cout << endl;
+
+    return 0;
+}
+
+```
+unordered_multiset  
+元素的顺序是不明确的，取决于hash table的内部布局，也取决于hashing函数，唯一可保证的是，内容相同的元素会相邻  
+
+
+##迭代器种类  
+以下三类  
++ 前向迭代器forward iterator。只能以累加操作符向前迭代，如forward_list。unordered_set、unordered_multiset
+  、unordered_map、unordered_multimap也都至少是此类别
++ 双向迭代器bidirectional iterator。顾名思义可以双向进行：以递增运算前进或以递减运算后退。list、set、multiset、map
+  、multimap提供的迭代器都属于此类  
++ 随即访问迭代器random_access iterator。不但具备双向迭代器的所有属性，还具备随机访问的能力，提供了迭代器算术运算的必要操作符
+。可以增加或减少一个偏移量、计算两个迭代器之间的距离、进行<或>比较，如vector、deque、array、string提供的迭代器  
+
+两个类别  
++ 输入型迭代器input iterator。向前迭代时可以读取/处理value
++ 输出型迭代器output iterator。向前迭代时能涂写value
+
+
 

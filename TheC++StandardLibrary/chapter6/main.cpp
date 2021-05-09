@@ -1,6 +1,7 @@
 #include <iostream>
 #include <array>
 #include <list>
+#include <set>
 #include <unordered_set>
 using namespace std;
 
@@ -13,24 +14,41 @@ void testArray() {
     cout << l.front() << ' ' << l.back();
 }
 
+void testIterator() {
+    list<char> cls{'a', 'b', 'c', 'd'};
+
+    list<char>::const_iterator pos;
+    for (pos = cls.begin(); pos != cls.end(); pos++) {
+//        *pos = *pos + 1;
+        cout << *pos<<' ';
+    }
+    cout << endl;
+
+}
+
+
 
 int main() {
 //    testArray();
 
-    unordered_multiset<string> cities{
-            "Braunschweig", "Hanover", "Frankfurt", "New York", "Chicago", "Toronto", "Paris", "Frankfurt"
-    };
+//    testIterator();
+typedef std::set<int> IntSet;
 
-    for (const auto &elem: cities) {
-        cout << elem << " ";
+IntSet coll;
+
+coll.insert(3);
+    coll.insert(1);
+    coll.insert(5);
+    coll.insert(4);
+    coll.insert(1);
+    coll.insert(6);
+    coll.insert(2);
+
+    IntSet::const_iterator pos;
+    for (pos = coll.begin(); pos != coll.end(); ++pos) {
+        cout << *pos<<' ';
     }
-    cout << endl;
 
-    cities.insert({"London", "Munich", "Hanover", "Braunschweig"});
-
-    for (const auto &elem: cities) {
-        cout << elem << " ";
-    }
     cout << endl;
 
     return 0;
