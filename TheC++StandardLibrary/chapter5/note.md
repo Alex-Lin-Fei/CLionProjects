@@ -126,8 +126,20 @@ shared_ptr<string> pNico(new string("nice"), [](string* p) {
 **note**: shared_ptr提供的default deleter 是delete，不是delete[]，因此当为array建立一个shared_ptr需要定义自己的deleter。  
 其内调用delete[]  
 ```c++
-shared_ptr<int> p(new int[10], std::default_delete<int[]>())
+//自定义deleter，传入一个函数、函数对象或者lambda  
+shared_ptr<int> p(new int[10], [](int * p) {
+    delete[] p; 
+});
+//使用为unique_ptr提供的辅助函数
+shared_ptr<int> p(new int[10], std::default_delete<int[]>());
+
+//对于unique_ptr，必须明确给予第二个template实参，指出你自己的deleter 
+unique_ptr<int, void(*)(int*)> p(new int[10], [](int* p) {
+    delete[] p;
+});
 ```
+
+
 
 ###weak_ptr
 shared_ptr存在的问题：  
@@ -190,7 +202,7 @@ up2 = up1;//ERROR
 up2 = std::move(up1); //OK
 ```
 如果赋值之前up2原本拥有对象，则会有一个delete的动作  
-失去对象拥有权的unique_ptr并不会得到一个指向无物的新拥有权，如果想指派心值给unique_ptr，  
+失去对象拥有权的unique_ptr并不会得到一个指向无物的新拥有权，如果想指派新值给unique_ptr，  
 必须是一个unique_ptr或者nullptr  
 ```c++
 unique_ptr<Class> up;
@@ -227,6 +239,57 @@ void g() {
 被销毁，导致最后一个由p拥有的对象被析构，无论如何都不会发生资源泄露  
 **note**: return 不需要std::move的原因是，c++11规定，编译器自动尝试添加move  
 
+unique_ptr被当做成员  
+在class内使用unique_ptr可避免资源泄露。如果使用unique_ptr取代寻常的pointer，就不再需要析构函数，因为对象被删除会连带所有成员被删除  
+此外unique_ptr也可以协助避免“对象初始化期间因抛出异常而造成资源泄露”。  
+**note**: 只有当一切构造动作都完成了，析构函数才能被调用，所以，对于“拥有多个raw pointer”的class，如果构造期间第一个new成功而第二个失败，  
+就可能造成资源泄露。  
 
+对于array：  
+参见函数testUniquePtrArray  
 
+```c++
+void testUniquePtrArray() {
+    unique_ptr<string[]> up(new string[10]);
+    up[0] = "hello";
+    cout << *up <<endl;  //ERROR
+    cout << up[0] << endl; //OK
+}
+```
+**note**:这个class起不了派生类型的array作为初值  
 
+##deleter  
+当你所指的对象要求的不止是调用delete或者delete[]，可具体制定自定义的deleter。然而，此处deleter的定义方式不同于shared_ptr   
+必须指明deleter的类型作为第二个template实参。该类型可以是个reference to function或者function pointer或者function object  
+若是个function object，其function call操作符()应该接受一个指向对象的pointer  
+```c++
+class ClassADeleter {
+    public:
+    void operator()(ClassA* p) {
+        cout << "call delete for class A" << endl;
+        delete p;
+    }
+};
+
+unique_ptr<ClassA, ClassADeleter> up(new ClassA);
+```
+
+如果你给的是个函数或者lambda，必须声明deleter的类型为void(*)(T*)或者function<void(T*)>，或者decltype  
+```c++
+//void(*)(T*)  
+unique_ptr<int, void(*)(int*)> up(new int[10], [](int* p) {
+    delete[] p;
+});
+
+//function<void(int*)>
+unique_ptr<int, function<void(int*)> up(new int[10], [](int* p) {
+delete[] p;
+});
+
+//decltype
+auto l =  [](int* p) {
+delete[] p;
+};
+
+unique_ptr<int, decltype(l)> up(new int[10], l);
+```

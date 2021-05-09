@@ -91,9 +91,39 @@ void testWeakPoint() {
     cout << "jim`s family exists" << endl;
 }
 
+void testUniquePtrArray() {
+    unique_ptr<string[]> up(new string[10]);
+    up[0] = "hello";
+//    cout << *up <<endl;
+    cout << up[0] << endl;
+
+    shared_ptr<int[]> p(new int[10],[](int* p) {
+        delete[] p;
+    });
+    unique_ptr<int, void(*)(int*)> x(new int[10], [](int* p) {
+        delete[] p;
+    });
+}
+
+
+class ClassA {
+
+};
+
+class ClassADeleter {
+public:
+    void operator()(ClassA* p) {
+        cout << "call delete for class A" << endl;
+        delete p;
+    }
+};
+
+unique_ptr<ClassA,  ClassADeleter> up(new ClassA);
+
+
 int main() {
 //testTuple();
-testSharedPoint();
-
+//testSharedPoint();
+//testUniquePtrArray();
     return 0;
 }
