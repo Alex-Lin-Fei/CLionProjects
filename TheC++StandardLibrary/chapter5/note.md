@@ -293,3 +293,22 @@ delete[] p;
 
 unique_ptr<int, decltype(l)> up(new int[10], l);
 ```
+###auto_ptr  
+存在非自觉遗失拥有权  
+```c++
+temeplate<typename T>
+void bad_print(auto_ptr<T> p) {
+    if (p.get() != nullptr) {
+        cout << *p<<endl;
+    }
+}
+
+int main() {
+    auto_ptr<int>p(new int);
+    *p = 0;
+    bad_print(p);
+    *p = 9; //RUNTIME ERROR
+}
+```
+**note**: 一般而言，smart pointer并非线程安全，虽然她适用某些保证  
+
