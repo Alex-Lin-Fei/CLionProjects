@@ -2,63 +2,63 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
+#define MAX_TOKENS 100
+#define MAX_TOKEN_LEN 100
 
-#define MAXTOKENLEN 64
-#define MAXTOKENS 100
-
-enum type_tag { IDENTIFIED, QUALIFIER, TYPE};
+enum type_tag { IDENTIFIER, QUALIFIER, TYPE};
 
 struct token {
     char type;
-    char string[MAXTOKENLEN];
+    char string[MAX_TOKEN_LEN];
 };
 
 int top = -1;
-
-
-/*保存第一个标识符之前的所有标记*/
-struct token stack[MAXTOKENS];
-
-/*保存刚读入的标记*/
+struct token stack[MAX_TOKENS];
 struct token this;
 
-//实用程序
-//字符串分类
+#define pop stack[top--]
+#define push(s) stack[++top] = s
+
+//推断标识符类型
 enum type_tag classify_string() {
-    if (!strcmp(this.string, "const")) {
-        strcpy(this.string, "read-only");
+    char *s = this.string;
+    if (!strcmp(s, "const ")) {
+        strcpy(s, "read-only");
         return QUALIFIER;
     }
-    if (!strcmp(this.string, "volatile"))
+
+    if (!strcmp(s, "volatile"))
         return QUALIFIER;
-    if (!strcmp(this.string, "void"))
+    if (!strcmp(s, "void"))
         return TYPE;
-    if (!strcmp(this.string, "char"))
+    if (!strcmp(s, "char"))
         return TYPE;
-    if (!strcmp(this.string, "signed"))
+    if (!strcmp(s, "signed"))
         return TYPE;
-    if (!strcmp(this.string, "unsigned"))
+    if (!strcmp(s, "unsigned"))
         return TYPE;
-    if (!strcmp(this.string, "short"))
+    if (!strcmp(s, "short"))
         return TYPE;
-    if (!strcmp(this.string, "int"))
+    if (!strcmp(s, "int"))
         return TYPE;
-    if (!strcmp(this.string, "float"))
+    if (!strcmp(s, "float"))
         return TYPE;
-    if (!strcmp(this.string, "double"))
+    if (!strcmp(s, "double"))
         return TYPE;
-    if (!strcmp(this.string, "long"))
+    if (!strcmp(s, "long"))
         return TYPE;
-    if (!strcmp(this.string, "struct"))
+    if (!strcmp(s, "struct"))
         return TYPE;
-    if (!strcmp(this.string, "union"))
+    if (!strcmp(s, "union"))
         return TYPE;
-    if (!strcmp(this.string, "enum"))
+    if (!strcmp(s, "enum"))
         return TYPE;
-    return IDENTIFIED;
+
+    return IDENTIFIER;
 }
 
-//读取下一个标记
+
+
 void gettoken() {
     char *p = this.string;
 
@@ -68,14 +68,14 @@ void gettoken() {
     if (isalnum(*p)) {
         while (isalnum(*++p = getchar()))
             continue;
-        ungetc(*p, stdin);
+        ungetc(*p, stdin); //退回一个字符
         *p = '\0';
         this.type = classify_string();
         return;
     }
 
     if (*p == '*') {
-        strcpy(this.string, "pointer to");
+        strcpy(this.string, "point to");
         this.type = '*';
         return;
     }
@@ -88,10 +88,11 @@ void gettoken() {
 
 void read_to_first_identifier() {
     gettoken();
-    while (this.type != IDENTIFIED) {
-        stack[++top] = this;
+    while (this.type != IDENTIFIER) {
+        push(this);
         gettoken();
     }
+
     printf("%s is ", this.string);
     gettoken();
 }
@@ -99,18 +100,53 @@ void read_to_first_identifier() {
 void deal_with_arrays() {
     while (this.type == '[') {
         printf("array ");
-        gettoken(); //有可能是数字或者]
+        gettoken();
         if (isdigit(this.string[0])) {
             printf("0..%d ", atoi(this.string) - 1);
             gettoken();
         }
-        gettoken(); //读取 ]之后的下一个字符
+        gettoken();
         printf("of ");
     }
 }
 
+void deal_with_function_args() {
+    while (this.type != ')') {
+        gettoken();
+    }
+    gettoken();
+    printf("function returning ");
+}
 
+void deal_with_pointers() {
+    while (stack[top].type == '*') {
+        printf("%s ", pop.string);
+    }
+}
+
+void deal_with_declarator() {
+//    处理标识符之后可能存在的数组/函数
+    switch (this.type) {
+        case '[': deal_with_arrays();break;
+        case '(': deal_with_function_args();
+    }
+
+    deal_with_pointers();
+    while (top>=0) {
+        if (stack[top].type == '(') {
+            pop;
+            gettoken();
+            deal_with_declarator();
+        } else {
+            printf("%s ", pop.string);
+        }
+    }
+}
 
 int main() {
+    read_to_first_identifier();
+    deal_with_declarator();
+    printf("\n");
 
+    return 0;
 }
