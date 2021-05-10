@@ -232,8 +232,25 @@ inserter,它可以使算法以安插方式而非覆写方式运作,可以解决�
 ##串流迭代器  
 示例代码:  
 ```c
+vector<int> coll;
 
+    copy(istream_iterator<int>(cin),
+            istream_iterator<int>(),
+         back_inserter(coll));
+
+    sort(coll.begin(), coll.end());
+
+    unique_copy(coll.cbegin(), coll.cend(), ostream_iterator<int>(cout, "\n"));
+    //console
+3 1 65 2 21 4l
+1
+2
+3
+4
+21
+65
 ```
+**note**:输入一个非指定类型的数据才会停止输入
 
 ##反向迭代器  
 reverse iterator会造成算法逆向操作,其内部对increment操作符的调用转换为对decrement操作符的调用,反之亦然  

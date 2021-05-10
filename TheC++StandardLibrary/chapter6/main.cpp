@@ -57,15 +57,15 @@ void testInserter() {
 
 
 void testStreamIterator() {
-    vector<string> coll;
+    vector<int> coll;
 
-    copy(istream_iterator<string>(cin),
-            istream_iterator<string>(),
+    copy(istream_iterator<int>(cin),
+            istream_iterator<int>(),
          back_inserter(coll));
 
     sort(coll.begin(), coll.end());
 
-    unique_copy(coll.cbegin(), coll.cend(), ostream_iterator<string>(cout, "\n"));
+    unique_copy(coll.cbegin(), coll.cend(), ostream_iterator<int>(cout, "\n"));
 }
 
 
