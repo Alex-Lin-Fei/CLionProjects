@@ -9,4 +9,10 @@
 /home/lilin/CLionProjects/ExpertCProgramming/chapter3/main.c
 stdio.h
 -
+string.h
+-
+ctype.h
+-
+stdlib.h
+-
 
