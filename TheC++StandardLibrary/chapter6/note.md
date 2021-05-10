@@ -160,5 +160,49 @@ unordered_multiset
 + 输入型迭代器input iterator。向前迭代时可以读取/处理value
 + 输出型迭代器output iterator。向前迭代时能涂写value
 
+可以将非常量迭代器赋值给常量迭代器  
+```c
+    vector<int>::iterator p = x.begin();
+    vector<int>::const_iterator cp = p;
+    cout << &p << ' ' << endl;
+    cout << &cp<<' ' <<endl;
+    //console
+0x7ffd999a5370
+0x7ffd999a5378 
+两迭代器地址不同,且只有p的值可以被改变
+```
+
+#算法Algorithm  
+**note**: 排序函数sort与反转函数reverse均会改变元素的value,因此需传入非常量迭代器,不能传入cbegin(),cend(),如  
+```c
+    vector<int> x {1,2,4,3,45,6}; 
+    sort(x.begin(), x.end()); //OK
+    sort(x.cbegin(), x.cend());//RUNTIME ERROR
+    reverse(x.cbegin(), x.cend());//RUNTIME ERROR
+    reverse(x.begin(),x.end());//OK
+```
+##处理多重区间multiple ranges  
+有数个算法可以同时处理多重区间,通常你必须设定第一个区间的起点和终点,至于其他区间,只需设定起点即可,终点通常可以由第一个区间元素数量推导出来  
+```c
+if (equal(coll1.begin(), coll1.end(), coll2.begin()) {
+    
+}
+```
+**note**: 如果某个算法用来处理多重区间,那么当你调用它时,必须确保第二个(以及其他)区间所拥有的元素个数至少和第一个区间的元素个数相同
+例如:
+```c
+    list<int> coll1{1,2,3,4,5};
+    vector<int> coll2;
+//RUNTIME ERROR
+    copy(coll1.begin(), coll1.end(), coll2.begin());
+```
+由于该算法执行的是覆写动作而非安插,可以修正  
++ 确认目标区间有足够的元素空间  
++ 采用insert iterator  
+
+
+
+
+
 
 

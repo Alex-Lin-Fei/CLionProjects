@@ -3,6 +3,8 @@
 #include <list>
 #include <set>
 #include <unordered_set>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 void testArray() {
@@ -26,12 +28,35 @@ void testIterator() {
 
 }
 
+void testRange() {
+    list<int> coll1{1,2,3,4,5};
+    vector<int> coll2;
+    coll2.resize(6);
 
+    copy(coll1.begin(), coll1.end(), coll2.begin());
+}
 
 int main() {
 //    testArray();
 
 //    testIterator();
+/*
+vector<int> x {1,2,4,3,45,6};
+sort(x.begin(), x.end());
+    sort(x.cbegin(), x.cend());
+    reverse(x.cbegin(), x.cend());
+    reverse(x.begin(),x.end());
+
+    vector<int>::iterator p = x.begin();
+    vector<int>::const_iterator cp = p;
+    cout << &p << ' ' << endl;
+    cout << &cp<<' ' <<endl;
+    *cp = 0;
+    *p = 0;
+    cout << *cp<<endl;
+*/
+/*
+
 typedef std::set<int> IntSet;
 
 IntSet coll;
@@ -50,6 +75,8 @@ coll.insert(3);
     }
 
     cout << endl;
-
+*/
+testRange();
     return 0;
+
 }
