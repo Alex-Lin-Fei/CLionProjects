@@ -200,9 +200,45 @@ if (equal(coll1.begin(), coll1.end(), coll2.begin()) {
 + 确认目标区间有足够的元素空间  
 + 采用insert iterator  
 
+#迭代器之适配器(iterator adapter)  
+迭代器iterator是一个纯抽象概念,任何东西,只要其行为类似迭代器,它就是一个迭代器  
+迭代器适配器类型  
++ insert iterator(安插型)
++ stream iterator(串流型)
++ reverse iterator(逆向)
++ move iterator(搬迁)
 
+##安插型迭代器  
+inserter,它可以使算法以安插方式而非覆写方式运作,可以解决算法的目标空间不足问题,促使目标区间的大小按照需要增长  
+示例代码:  
+```c
+ list<int> coll1 = {1,2,3,4,5};
 
+    vector<int> coll2;
+    copy(coll1.begin(), coll1.end(), back_inserter(coll2));
 
+    deque<int> coll3;
+    copy(coll1.begin(), coll1.end(), front_inserter(coll3));
 
+    set<int> coll4;
+    copy(coll1.begin(), coll1.end(), inserter(coll4, coll4.begin()));
+```
 
+三种预定义的insert iterator:  
++ back inserter(安插于容器最末端),使用push_back(val)在尾部插入元素,表达式back_inserter(container)
++ front inserter(安插于容器最前端),使用push_front(val)在容器前端插入元素,表达式front_inserter(container)
++ general inserter(一般性的inserter, 指的是在初始化时接受之第二个实参所指的位置的前方插入元素),使用insert(pos, val)在pos位置安插元素,表达式inserter(container, pos)  
 
+##串流迭代器  
+示例代码:  
+```c
+
+```
+
+##反向迭代器  
+reverse iterator会造成算法逆向操作,其内部对increment操作符的调用转换为对decrement操作符的调用,反之亦然  
+所有提供双向或随即访问迭代器的容器(也就是forward_list之外的所有序列式容器和所有关联式容器)都可以通过成员函数rbegin()和rend()产生一个反向迭代器  
+还有只读反向迭代器crbegin() ,crend()  
+
+##move iterator  
+参见page216

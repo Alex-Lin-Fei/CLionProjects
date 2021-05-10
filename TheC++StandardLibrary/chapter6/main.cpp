@@ -5,6 +5,10 @@
 #include <unordered_set>
 #include <vector>
 #include <algorithm>
+#include <deque>
+#include <string>
+#include <iterator>
+
 using namespace std;
 
 void testArray() {
@@ -35,6 +39,35 @@ void testRange() {
 
     copy(coll1.begin(), coll1.end(), coll2.begin());
 }
+
+void testInserter() {
+    list<int> coll1 = {1,2,3,4,5};
+
+    vector<int> coll2;
+    copy(coll1.begin(), coll1.end(), back_inserter(coll2));
+
+    deque<int> coll3;
+    copy(coll1.begin(), coll1.end(), front_inserter(coll3));
+
+    set<int> coll4;
+    copy(coll1.begin(), coll1.end(), inserter(coll4, coll4.begin()));
+
+
+}
+
+
+void testStreamIterator() {
+    vector<string> coll;
+
+    copy(istream_iterator<string>(cin),
+            istream_iterator<string>(),
+         back_inserter(coll));
+
+    sort(coll.begin(), coll.end());
+
+    unique_copy(coll.cbegin(), coll.cend(), ostream_iterator<string>(cout, "\n"));
+}
+
 
 int main() {
 //    testArray();
@@ -76,7 +109,9 @@ coll.insert(3);
 
     cout << endl;
 */
-testRange();
+//testRange();
+//testInserter();
+testStreamIterator();
     return 0;
 
 }
