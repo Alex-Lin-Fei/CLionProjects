@@ -17,4 +17,14 @@ set
 -
 unordered_set
 -
+vector
+-
+algorithm
+-
+deque
+-
+string
+-
+iterator
+-
 
