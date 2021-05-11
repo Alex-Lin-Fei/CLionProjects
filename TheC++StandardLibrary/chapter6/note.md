@@ -479,4 +479,137 @@ transform(coll.begin(), coll.end(), coll.begin(), [](double d) {
 其中,表达式表述了一个函数对象  
 
 ##lambda的好处 
+假设想要查找某集合内"数值在x和y之间"的第一个元素  
+```c
+deque<int> coll = {1,2,3,4,5};
+
+int x = 5;
+int y = 10;
+auto pos = find_if(coll.begin(), coll.end(), [=](int i){
+    return i > x && i < y;
+});
+```
+##lambda的局限  
+让我们考虑用lambda为关联式容器指出一个排序准则
+```c
+auto cmp = [](const Person& p1, const Person& p2) {
+return p1.firstname() < p2.firstname();
+};
+set<Person, decltype(cmp)> coll(cmp);
+```
+由于set声明式需要指明lambda类型,必须使用decltype,它会为一个lambda对象产出类型,也必须将lambda对象传入set的构造函数,否则会调用被传入的排序准则的default构造函数  
+而c++11 lambda没有default构造函数  
+
+#h函数对象function object
+传递给算法的"函数型实参"不一定得是函数,可以是行为类似函数的对象,成为函数对象,或者仿函数functor, 包括  
++ function pointer  
++ 带有成员函数operator()的class的对象  
++ 带有转换函数可将自己转换为pointer to function 的class的对象  
++ lambda
+##定义一个函数对象
+任何东西,只要其行为像函数,它就是个函数,即"使用小括号传递实参,借以调用某个东西"  
+```c
+class X {
+    public:
+    return-value operator()(arguments) const;
+};
+```
+现在,可以将其对象作为函数来调用  
+```c
+X fo;
+fo(arg1, arg2); // == fo.operator()(arg1, arg2)
+```
+以下是一个完整的例子  
+```c
+class PrintInt {
+public:
+    void operator()(int elem) const {
+        cout << elem << ' ';
+    }
+};
+
+
+void testFunctor() {
+    vector<int> coll;
+
+    for (int i = 1; i < 10; ++i) {
+        coll.push_back(i);
+    }
+
+    for_each(coll.begin(), coll.end(), PrintInt());
+    cout << endl;
+}
+//console
+1 2 3 4 5 6 7 8 9
+```
+
+比起寻常函数,函数对象具有以下优点  
++ 函数对象是一种带有状态的函数  
++ 每个函数对象具有自己的类型  
++ 函数对象通常比函数速度更快  
+
+若容器中每个元素都得增加一个值,倘若在编译期间得知这个值,则可以使用寻常函数  
+```c
+
+template <int theValue>
+void add(int &elem) {
+    elem += theValue;
+}
+
+void testFunctor() {
+    vector<int> coll;
+
+    for (int i = 1; i < 10; ++i) {
+        coll.push_back(i);
+    }
+
+    for_each(coll.begin(), coll.end(), add<10>);
+//    for_each(coll.begin(), coll.end(), AddValue(*coll.begin()));
+    for (auto& elem : coll) {
+        cout << elem << ' ';
+    }
+    cout << endl;
+}
+
+//console
+11 12 13 14 15 16 17 18 19
+```
+若执行时期处理这个特定值,
+示例代码(携带状态)  
+```c
+class AddValue {
+private:
+int addValue;
+public:
+AddValue(int v): addValue(v) {
+
+}
+void operator()(int & elem) const {
+elem += addValue;
+}
+};
+
+
+void testFunctor() {
+vector<int> coll;
+
+for (int i = 1; i < 10; ++i) {
+coll.push_back(i);
+}
+
+for_each(coll.begin(), coll.end(), AddValue(*coll.begin()));
+for (auto& elem : coll) {
+cout << elem << ' ';
+}
+cout << endl;
+}
+//console
+2 3 4 5 6 7 8 9 10
+```
+
+##预定义的函数对象  
+参见page239  
+##binder  
+参见page241
+
 

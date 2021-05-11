@@ -228,6 +228,51 @@ void testBinaryPredicate() {
     cout << persons[1].firstname() << ' ' << persons[1].lastname() << endl;
 }
 
+void testLambda() {
+    auto cmp = [](const Person& p1, const Person& p2) {
+        return p1.firstname() > p2.firstname();
+    };
+    set<Person, decltype(cmp)> coll(cmp);
+    coll.insert({Person("Jack", "smith"), Person("Kary", "black")});
+
+    for (auto & person: coll)
+        cout << person.firstname() << ' ' << person.lastname() << endl;
+}
+
+class AddValue {
+private:
+    int addValue;
+public:
+    AddValue(int v): addValue(v) {
+
+    }
+    void operator()(int & elem) const {
+        elem += addValue;
+    }
+};
+
+
+template <int theValue>
+void add(int &elem) {
+    elem += theValue;
+}
+
+void testFunctor() {
+    vector<int> coll;
+
+    for (int i = 1; i < 10; ++i) {
+        coll.push_back(i);
+    }
+
+    for_each(coll.begin(), coll.end(), add<10>);
+//    for_each(coll.begin(), coll.end(), AddValue(*coll.begin()));
+    for (auto& elem : coll) {
+        cout << elem << ' ';
+    }
+    cout << endl;
+}
+
+
 
 
 int main() {
@@ -279,5 +324,7 @@ coll.insert(3);
 //    testTransform();
 //testFindIf();
 //testBinaryPredicate();
+//testLambda();
+testFunctor();
     return 0;
 }
