@@ -66,10 +66,15 @@ void my_pointer_func(char * pa) {
     printf(" ++pa = %#x \n", ++pa);
 }
 
+void test(char * a, char b[]) {
+    printf("&a: %#x; &b: %#x; a: %#x; b: %#x\n", &a, &b,a,b);
+}
+
 int main() {
     printf(" addr of global array = %#x \n", &ga+1);
     printf(" addr (ga[0]) = %#x \n", &(ga[0]));
     printf(" addr (ga[1]) = %#x \n", &(ga[1]));
     my_array_func(ga);
     my_pointer_func(ga);
+    test(ga,ga);
 }
