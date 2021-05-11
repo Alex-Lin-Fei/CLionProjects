@@ -259,3 +259,224 @@ reverse iterator会造成算法逆向操作,其内部对increment操作符的调
 
 ##move iterator  
 参见page216
+
+##用户自定义的泛型算法(user-defined generic function)  
+参见page216  
+
+##更易型算法(manipulating algorithm)  
+是指会移除或重排或修改元素的算法  
+###移除removing元素  
+示例代码:  
+```c
+list<int> coll;
+
+    for (int i = 1; i <= 6; i++) {
+        coll.push_back(i);
+        coll.push_front(i);
+    }
+
+    cout << "Pre: ";
+    copy(coll.begin(), coll.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    remove(coll.begin(), coll.end(), 3);
+
+    cout << "Post: ";
+    copy(coll.begin(), coll.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+```
+以上代码的输出结果与预期并不相同
+```c
+//console
+Pre: 6 5 4 3 2 1 1 2 3 4 5 6
+Post: 6 5 4 2 1 1 2 4 5 6 5 6 
+```
+事实上,这个算法返回了一个新终点.你可以利用该终点获得新区间,缩减之后的容器大小,或是获得被删除元素的个数  
+```c
+list<int> coll;
+
+    for (int i = 1; i <= 6; i++) {
+        coll.push_back(i);
+        coll.push_front(i);
+    }
+
+    cout << "Pre: ";
+    copy(coll.begin(), coll.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    list<int>::iterator end = remove(coll.begin(), coll.end(), 3);
+    copy(coll.begin(), end, ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    cout << "number of removed elements: " << distance(end, coll.end()) << endl;
+
+    coll.erase(end, coll.end());
+
+    copy(coll.begin(), coll.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+```
+输出结果为:  
+```c
+//console
+Pre: 6 5 4 3 2 1 1 2 3 4 5 6
+6 5 4 2 1 1 2 4 5 6
+number of removed elements: 2
+6 5 4 2 1 1 2 4 5 6
+```
+这个end是"被修改集合"经过元素移除动作后的新逻辑终点  
+在这里,原本为迭代器而设计的辅助函数distance()发挥了作用.功能是返回两个迭代器之间的距离,如果这两个迭代器都是随即访问迭代器,可以直接使用operator-获取距离  
+如果真想把那些被删除的元素斩草除根,成员函数erase()正适用于此目的,可以删除"实参所指示的区间"内所有元素  
+**note**: 一般来说,迭代器对自己所属的容器一无所知,任何"以迭代器访问容器"的算法,都不得通过迭代器调用容器类所提供的任何成员函数  
+
+##更易associated(关联式)和unordered(无序)容器
+更易型算法若用于关联式容器或无序容器,会出现问题.关联式容器和无序容器不能被当作操作目标,因为更易型算法会改变某位置的值,进而破坏容器本身对次序的维护(对关联式容器而言是已排序特性,对无序容器而言则是其hash函数的运算结果)  
+移除元素可以调用成员函数erase
+```c
+set<int> coll = {1,2,3,4,5,6};
+    copy(coll.begin(), coll.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    int num = coll.erase(3);
+
+    cout << "number of removed elements: " << num << endl;
+    copy(coll.begin(), coll.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+```
+输出结果如下:  
+```c
+//console
+1 2 3 4 5 6 
+number of removed elements: 1
+1 2 4 5 6 
+```
+
+##算法vs成员函数  
+如果高效能是你的首要目标,应该总是优先选用成员函数,问题是你必须先知道,某个容器确实存在效能明显突出的成员函数  
+
+#以函数作为算法实参
+for_each()算法,针对区间内的每个元素,调用一个由用户指定的函数  
+示例代码:  
+```c
+
+void print(int elem) {
+    cout << elem << ' ';
+}
+
+void testForEach() {
+    vector<int> coll;
+
+    for (int i = 1; i <= 9; ++i) {
+        coll.push_back(i);
+    }
+    for_each(coll.begin(), coll.end(), //range 
+             print);                   //operation
+
+    cout << endl;
+}
+```
+或者,定义某种操作使得其在"容器元素转换至另一个容器"时被调用  
+```c
+set<int> coll1;
+    vector<int> coll2;
+
+    for (int i = 1; i <= 9; ++i) {
+        coll1.insert(i);
+    }
+
+    for_each(coll1.begin(), coll1.end(), print);
+    cout << endl;
+    transform(coll1.begin(), coll1.end(),//source
+              back_inserter(coll2),      //destination
+              square);  //operation
+    for_each(coll2.begin(), coll2.end(), print); 
+
+    //console
+1 2 3 4 5 6 7 8 9
+1 4 9 16 25 36 49 64 81 
+```
+##判断式(predicate)
+predicate是一种特殊的辅助函数,会返回bool值,常被用来指定作为排序准则或查找准则,可能有一或两个操作数  
+###unary predicate(单参判断式)
+示例代码(查找素数)
+```c
+
+bool isPrime(int number) {
+    number = abs(number);
+
+    if (number < 2)
+        return false;
+    int divisor;
+    for (divisor = number / 2; number % divisor != 0; --divisor) {
+        ;
+    }
+    return divisor == 1;
+}
+
+void testFindIf() {
+    list<int> coll;
+
+    for (int i = 24; i <= 30; ++i) {
+        coll.push_back(i);
+    }
+
+
+    auto pos = find_if(coll.begin(), coll.end(), isPrime);
+    if (pos != coll.end())
+        cout << *pos<< " is first prime number found" << endl;
+    else
+        cout <<"no prime number found \n";
+}
+//console
+29 is first prime number found
+```
+
+###binary predicate(双参判断式)  
+比较两个实参的特定属性,例如,以自己的准则进行排序,如果元素本身不支持operator<,如下:  
+示例代码:  
+```c
+class Person {
+private:
+    string fname;
+    string lname;
+public:
+    Person(string&& f, string&& l) {
+        fname = f;
+        lname = l;
+    }
+    string firstname() const {
+        return fname;
+    }
+    string lastname() const {
+        return lname;
+    }
+};
+
+bool my_operator(Person& p1, Person& p2) {
+    return p1.firstname() < p2.firstname();
+}
+
+void testBinaryPredicate() {
+    vector<Person> persons{Person("Jack", "smith"), Person("Kary", "black")};
+    sort(persons.begin(), persons.end(), my_operator);
+
+    cout << persons[0].firstname() << ' ' << persons[0].lastname() << endl;
+    cout << persons[1].firstname() << ' ' << persons[1].lastname() << endl;
+}
+//console
+    Jack smith
+    Kary black
+```
+也可以使用函数对象来实现一个排序准则,优点是制作出来的准则将是一个类型(type)  
+
+
+#使用lambda  
+lambda是一种"在表达式或语句内指明函数行为"的定义式  
+```c
+transform(coll.begin(), coll.end(), coll.begin(), [](double d) {
+    return d * d;
+});
+```
+其中,表达式表述了一个函数对象  
+
+##lambda的好处 
+
