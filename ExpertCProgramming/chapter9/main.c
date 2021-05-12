@@ -75,6 +75,6 @@ int main() {
     printf(" addr (ga[0]) = %#x \n", &(ga[0]));
     printf(" addr (ga[1]) = %#x \n", &(ga[1]));
     my_array_func(ga);
-    my_pointer_func(ga);
     test(ga,ga);
+    my_pointer_func(ga);
 }
