@@ -1,6 +1,10 @@
 #include <iostream>
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    int x;
+    scanf("%d", &x);
+    int t[x];
+
+    std::cout << sizeof t / sizeof(int) << std::endl;
     return 0;
 }
