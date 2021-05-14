@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/chapter7.dir/main.cpp.o -o chapter7 
+/usr/bin/cc -g CMakeFiles/chapter7.dir/main.c.o -o chapter7 
