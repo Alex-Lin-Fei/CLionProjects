@@ -117,7 +117,7 @@ before: 0x7ffe45e0c672; after: 0x7ffe45e0c673
 0x7ffe45e0c672 0x7ffe45e0c674
 0x7ffde6af99d6 0x7ffde6af99d7
 ```
-**猜想**:void*指针i自增为1?  
+**猜想**:void*指针自增为1,因为sizeof(void) = 1  
 
 ###从指针减去整数  
 地址值会减去数据类型的长度和整数值的乘积  
