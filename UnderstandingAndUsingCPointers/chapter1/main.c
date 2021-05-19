@@ -42,7 +42,7 @@ void test2() {
     *cpi = 9;
     printf("%d\n", num);
     int n;
-    cpi = &n;
+//    cpi = &n;
 
 }
 
