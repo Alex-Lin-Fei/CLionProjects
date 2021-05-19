@@ -160,6 +160,76 @@ before: 0x7fffbc1be6b2; after: 0x7fffbc1be6b0
 
 ##常量指针  
 ###指向常量的指针  
+可以将指针定义为指向常量,这意味着不能通过指针修改它所引用的值  
+示例代码:  
+```c
+int num = 5;
+    const int limit = 500;
+    int *pi; //指向整数
+    const int *pci; //指向整数常量
+
+    pi = &num;
+    pci = &limit;
+
+    printf("  num - address: %p  value: %d\n", &num, num);
+    printf("limit - address: %p  value: %d\n", &limit, limit);
+    printf("   pi - address: %p  value: %p\n", &pi, pi);
+    printf("  pci - address: %p  value: %p\n", &pci, pci);
+```
+
+输出结果为:  
+```c
+ num - address: 0x7ffcb80d8480  value: 5
+limit - address: 0x7ffcb80d8484  value: 500
+   pi - address: 0x7ffcb80d8488  value: 0x7ffcb80d8480
+  pci - address: 0x7ffcb80d8490  value: 0x7ffcb80d8484
+
+```
+我们可以解引用读取,但是不能修改  
+```c
+    *pci = 9; //ERROR
+    *pi = 9;
+```
+把pci声明为指向整数常量的指针意味着  
++ pci可以被修改为指向不同的整数常量  
++ pci可以被修改为指向不同的非整数常量  
++ 可以解引用pci以读取数据  
++ 不能解引用pci而修改它指向的数据  
+
+**note**:
+以下两个语句等价:  
+```c
+const int *pci;
+int const * pci;
+```
+
+###指向非常量的常量指针  
+指针不可变,指向的数据可变  
+```c
+int num;
+int * const cpi = &num;
+```
+意味着:  
++ cpi必须被初始化为指向非常量变量
++ cpi不能被修改
++ cpi指向的数据可以被修改  
+
+无论cpi引用了什么,都可以解引用cpi然后赋值  
+```c
+const int num = 1;
+    int * const cpi = &num;
+    *cpi = 9;
+    printf("%d\n", num);
+```
+但是会有警告,因为这样的话常量就可以修改了  
+
+###指向常量的常量指针  
+本身无法修改,指向的数据也无法修改  
+```c
+const int * const cpci = &limit;
+```
+
+
 
 
 

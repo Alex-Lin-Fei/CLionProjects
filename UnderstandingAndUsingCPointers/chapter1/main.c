@@ -20,6 +20,32 @@ void testPointer() {
 //    printf("%p %p\n", pv,  pv+1);
 }
 
+void test1() {
+    int num = 5;
+    const int limit = 500;
+    int *pi; //指向整数
+    const int *pci; //指向整数常量
+
+    pi = &num;
+    pci = &limit;
+    *pi = 9;
+
+    printf("  num - address: %p  value: %d\n", &num, num);
+    printf("limit - address: %p  value: %d\n", &limit, limit);
+    printf("   pi - address: %p  value: %p\n", &pi, pi);
+    printf("  pci - address: %p  value: %p\n", &pci, pci);
+}
+
+void test2() {
+    const int num = 1;
+    int * const cpi = &num;
+    *cpi = 9;
+    printf("%d\n", num);
+    int n;
+    cpi = &n;
+
+}
+
 int main() {
     int num;
     int * pi = &num;
@@ -32,7 +58,9 @@ int main() {
     printf("%d %d\n", size, siz);
     printf("%lu\n", sizeof(double*));
 
-    testPointer();
+//    testPointer();
 
+//test1();
+test2();
     return 0;
 }
