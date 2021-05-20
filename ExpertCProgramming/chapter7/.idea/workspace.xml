@@ -12,8 +12,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aceb11d2-66cb-4082-8140-cdaa188b607c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../chapter6/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter6/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chapter6/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter6/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chapter6/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter6/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chapter6/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter6/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../UnderstandingAndUsingCPointers/chapter1/cmake-build-debug/CMakeFiles/chapter1.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../UnderstandingAndUsingCPointers/chapter1/cmake-build-debug/CMakeFiles/chapter1.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../UnderstandingAndUsingCPointers/chapter1/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../UnderstandingAndUsingCPointers/chapter1/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../UnderstandingAndUsingCPointers/chapter1/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../UnderstandingAndUsingCPointers/chapter1/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../UnderstandingAndUsingCPointers/chapter1/note.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../UnderstandingAndUsingCPointers/chapter1/note.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,11 +57,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -65,6 +68,7 @@
       <updated>1620998287727</updated>
       <workItem from="1620998290800" duration="2741000" />
       <workItem from="1621146752014" duration="168000" />
+      <workItem from="1621408323338" duration="80000" />
     </task>
     <servers />
   </component>
