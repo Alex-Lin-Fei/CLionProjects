@@ -3,6 +3,7 @@
 #include <vector>
 #include <array>
 #include <algorithm>
+#include <list>
 #include <iterator>
 using namespace std;
 
@@ -109,8 +110,45 @@ void testVector() {
 
 }
 
+
+void printList(const list<int> & l1, const list<int> l2) {
+    cout << "List 1: ";
+    copy(l1.cbegin(), l1.cend(), ostream_iterator<int>(cout, " "));
+    cout << endl<<"List 2: ";
+    copy(l2.cbegin(), l2.cend(), ostream_iterator<int>(cout, " "));
+    cout << endl<<endl;
+}
+
+void testList() {
+    list<int> list1, list2;
+
+    for (int i = 0; i < 6; i++) {
+        list1.push_back(i);
+        list2.push_front(i);
+    }
+
+    printList(list1, list2);
+
+    list2.splice(find(list2.begin(), list2.end(), 3), list1);
+
+    printList(list1, list2);
+    list2.splice(list2.end(), list2, list2.begin());
+
+    printList(list1, list2);
+
+    list2.sort();
+    list1 = list2;
+    list2.unique();
+    printList(list1, list2);
+
+    list1.merge(list2);
+
+    printList(list1, list2);
+}
+
 int main() {
 //    testArray();
-testVector();
+//testVector();
+testList();
     return 0;
 }

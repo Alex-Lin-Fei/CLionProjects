@@ -295,6 +295,61 @@ capacity(): 10
 ##使用  
 参见page284  
 
+#List   
+使用一个doubly linked list(双向串列)管理元素  
+
+##list的能力  
++ 不支持随机访问  
++ 任何位置上执行元素插入和移除都非常快  
++ 安插和移除并不会造成指向其他元素的各个pointer reference iterator失效  
+##list的操作见page291  
+##运用实例  
+```c
+list<int> list1, list2;
+
+    for (int i = 0; i < 6; i++) {
+        list1.push_back(i);
+        list2.push_front(i);
+    }
+
+    printList(list1, list2);
+
+    list2.splice(find(list2.begin(), list2.end(), 3), list1);
+
+    printList(list1, list2);
+    list2.splice(list2.end(), list2, list2.begin());
+
+    printList(list1, list2);
+
+    list2.sort();
+    list1 = list2;
+    list2.unique();
+    printList(list1, list2);
+
+    list1.merge(list2);
+
+    printList(list1, list2);
+```
+运行结果如下:  
+```c
+List 1: 0 1 2 3 4 5 
+List 2: 5 4 3 2 1 0 
+
+List 1: 
+List 2: 5 4 0 1 2 3 4 5 3 2 1 0 
+
+List 1: 
+List 2: 4 0 1 2 3 4 5 3 2 1 0 5 
+
+List 1: 0 0 1 1 2 2 3 3 4 4 5 5 
+List 2: 0 1 2 3 4 5 
+
+List 1: 0 0 0 1 1 1 2 2 2 3 3 3 4 4 4 5 5 5 
+List 2: 
+
+```
+
+#forward list  
 
 
 
