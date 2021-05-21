@@ -9,4 +9,6 @@
 /home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter3/main.c
 stdio.h
 -
+malloc.h
+-
 
