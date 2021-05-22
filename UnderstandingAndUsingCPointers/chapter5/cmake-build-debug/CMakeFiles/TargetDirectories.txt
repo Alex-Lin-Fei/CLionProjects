@@ -1,0 +1,3 @@
+/home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter5/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter5/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter5/cmake-build-debug/CMakeFiles/chapter5.dir
