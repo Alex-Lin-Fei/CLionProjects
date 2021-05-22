@@ -9,4 +9,10 @@
 /home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter5/main.c
 stdio.h
 -
+string.h
+-
+malloc.h
+-
+ctype.h
+-
 
