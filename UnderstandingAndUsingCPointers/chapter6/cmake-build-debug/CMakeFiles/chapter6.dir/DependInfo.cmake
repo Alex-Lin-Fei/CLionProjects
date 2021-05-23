@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "/home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter6/main.c" "/home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter6/cmake-build-debug/CMakeFiles/chapter6.dir/main.c.o"
+  "/home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter6/tree.c" "/home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter6/cmake-build-debug/CMakeFiles/chapter6.dir/tree.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

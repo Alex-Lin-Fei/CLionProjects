@@ -13,4 +13,22 @@ malloc.h
 -
 string.h
 -
+ctype.h
+-
+tree.h
+/home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter6/tree.h
+
+/home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter6/tree.c
+string.h
+-
+stdio.h
+-
+stdlib.h
+-
+tree.h
+/home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter6/tree.h
+
+/home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter6/tree.h
+stdbool.h
+-
 

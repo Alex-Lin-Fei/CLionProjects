@@ -81,6 +81,12 @@
 		<Unit filename="/home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter6/main.c">
 			<Option target="chapter6"/>
 		</Unit>
+		<Unit filename="/home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter6/tree.c">
+			<Option target="chapter6"/>
+		</Unit>
+		<Unit filename="/home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter6/tree.h">
+			<Option target="chapter6"/>
+		</Unit>
 		<Unit filename="/home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter6/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

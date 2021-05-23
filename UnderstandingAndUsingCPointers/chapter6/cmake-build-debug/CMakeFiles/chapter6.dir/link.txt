@@ -1,1 +1,1 @@
-/usr/bin/cc -g CMakeFiles/chapter6.dir/main.c.o -o chapter6 
+/usr/bin/cc -g CMakeFiles/chapter6.dir/main.c.o CMakeFiles/chapter6.dir/tree.c.o -o chapter6 

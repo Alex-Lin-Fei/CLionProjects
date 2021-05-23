@@ -169,6 +169,33 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chapter6.dir/build.make CMakeFiles/chapter6.dir/main.c.s
 .PHONY : main.c.s
 
+tree.o: tree.c.o
+
+.PHONY : tree.o
+
+# target to build an object file
+tree.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chapter6.dir/build.make CMakeFiles/chapter6.dir/tree.c.o
+.PHONY : tree.c.o
+
+tree.i: tree.c.i
+
+.PHONY : tree.i
+
+# target to preprocess a source file
+tree.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chapter6.dir/build.make CMakeFiles/chapter6.dir/tree.c.i
+.PHONY : tree.c.i
+
+tree.s: tree.c.s
+
+.PHONY : tree.s
+
+# target to generate assembly for a file
+tree.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chapter6.dir/build.make CMakeFiles/chapter6.dir/tree.c.s
+.PHONY : tree.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -181,6 +208,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... tree.o"
+	@echo "... tree.i"
+	@echo "... tree.s"
 .PHONY : help
 
 
