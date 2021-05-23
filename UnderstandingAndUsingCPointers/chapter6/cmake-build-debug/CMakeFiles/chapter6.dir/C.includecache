@@ -6,18 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter6/main.c
-stdio.h
--
-malloc.h
--
-string.h
--
-ctype.h
--
-tree.h
-/home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter6/tree.h
-
 /home/lilin/CLionProjects/UnderstandingAndUsingCPointers/chapter6/tree.c
 string.h
 -

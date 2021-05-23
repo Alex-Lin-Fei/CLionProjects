@@ -93,8 +93,10 @@ bool DeleteItem(const Item * pi, Tree * ptree) {
         DeleteNode(&ptree->root);
     else if (look.parent->left == look.child)
         DeleteNode(&look.parent->left);
+//        DeleteNode(&look.child);
     else
         DeleteNode(&look.parent->right);
+//        DeleteNode(&look.child);
     ptree->size--;
     look.child = NULL;
 
@@ -211,17 +213,17 @@ static Pair SeekItem(const Item * pi, const Tree * ptree) {
 
 
 static void DeleteNode(Trnode ** ptr) {
-    Trnode  * temp;
+    Trnode * temp;
 
     if (!(*ptr)->left) {
         temp = *ptr;
-        *ptr = (*ptr)->left;
+        *ptr = (*ptr)->right;
         free(temp);
     }
 
     else if (!(*ptr)->right) {
         temp = *ptr;
-        *ptr = (*ptr)->right;
+        *ptr = (*ptr)->left;
         free(temp);
     }
 
