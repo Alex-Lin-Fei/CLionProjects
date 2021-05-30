@@ -1,6 +1,8 @@
 #include <stdio.h>
 
 int main() {
-    printf("Hello, World!\n");
+    char * p  = "Hello";
+    char t[] = "Hello";
+    printf("%p %p %p\n", p, &t, "Hello");
     return 0;
 }
