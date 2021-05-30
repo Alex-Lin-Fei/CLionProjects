@@ -176,6 +176,10 @@ static char * magnitudes[] = {
         "", "THOUSAND ", "MILLION ", "BILLION "
 };
 
+// char *strcat(char *dest, const char *src);
+//strcat() 会将参数 src 字符串复制到参数 dest 所指的字符串尾部；
+// dest 最后的结束字符 NULL 会被覆盖掉，并在连接后的字符串的尾部再增加一个 NULL。
+
 static void do_one_group(unsigned int amount, char *buffer, char ** magnitudes) {
     if (amount / 1000 > 0)
         do_one_group(amount / 1000, buffer, magnitudes + 1);
@@ -205,13 +209,16 @@ void written_amount(unsigned int amount, char * buffer) {
     if (amount == 0)
         strcpy(buffer, "ZERO ");
     else {
-        *buffer = '\0';
-
+        *buffer = '\0';  //设置buffer尾部
+        do_one_group(amount, buffer, magnitudes);
     }
 }
 
 
 int main() {
-    printf("%d", max_list(-1));
+    char buffer[1000];
+    written_amount(1211, buffer);
+    puts(buffer);
+
     return 0;
 }
