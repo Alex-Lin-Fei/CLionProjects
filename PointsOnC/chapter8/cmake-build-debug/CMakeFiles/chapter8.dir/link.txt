@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/chapter8.dir/main.c.o -o chapter8 
