@@ -361,7 +361,7 @@ int format(char * format_string, char const *digit_string) {
  * exercise 17
  * */
 char * edit(char * pattern, char const * digits) {
-    
+
 }
 
 int main(int argc, char * argv[]) {
