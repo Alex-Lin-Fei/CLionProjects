@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lilin/CLionProjects/APUE/chapter1/main.c
+my_err.h
+/home/lilin/CLionProjects/APUE/chapter1/my_err.h
+dirent.h
+-
+sys/wait.h
+-
+
