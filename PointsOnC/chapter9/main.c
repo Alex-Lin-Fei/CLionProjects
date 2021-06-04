@@ -346,6 +346,40 @@ void decrypt(char *data, char const * key) {
  * exercise 15
  * */
 void dollars(char * dest, char const * src) {
+    int len = (int) strlen(src);
+    int idx = 0; //dest下标
+
+    *dest = '\0';
+    strcat(dest, "$");
+//    只有小数位
+    if (len < 3) {
+        strcat(dest, "0.");
+        if (len < 2) {
+            strcat(dest, "0");
+            strcat(dest, len == 0? "0": src);
+        } else
+            strcat(dest, src);
+    } else {
+        len -= 2;
+        int s = len % 3;
+        int t = len / 3;
+
+        dest++;
+
+        for (int i = 0; i < s; i++) {
+        *dest++ = *src++;
+        }
+
+        for (int i = 0; i < t; i++) {
+            *dest++ = ',';
+            *dest++ = *src++;
+            *dest++ = *src++;
+            *dest++ = *src++;
+        }
+        *dest = '.';
+        *++dest = '\0';
+        strcat(dest, src);
+    }
 }
 
 
@@ -354,7 +388,48 @@ void dollars(char * dest, char const * src) {
  * exercise 16
  * */
 int format(char * format_string, char const *digit_string) {
+    if (*digit_string == '\0')
+        return 0;
+    char *pf = strchr(format_string, '\0') - 1;
+    char *pd = strchr(digit_string, '\0') - 1;
 
+    while (pd >= digit_string && pf >= format_string) {
+        if (*pf == '#')
+            *pf = *pd;
+        else {
+            pf--;
+            continue;
+        }
+
+        pf--;
+        pd--;
+    }
+
+//    #个数少于数字
+    if (pd >= digit_string)
+        return 0;
+
+//   恰好小数点前就没有了数字 需要补0
+    if (pd < digit_string && pf >= format_string) {
+//        找pz
+        char *pz = strchr(format_string, '.');
+        if (pz) {
+            pf = pz - 1;
+            while (!isdigit(*pf)) {
+                if (*pf != '.')
+                    *pf = '0';
+                pf++;
+            }
+        }
+    }
+
+//  去除多余#和,
+    pf = format_string;
+    while (!isdigit(*pf)) {
+        *pf++ = ' ';
+    }
+
+    return 1;
 }
 
 
@@ -366,14 +441,11 @@ char * edit(char * pattern, char const * digits) {
 }
 
 int main(int argc, char * argv[]) {
-    char key[100] = "trailblazers";
-    char data[100] = "attack at dawn";
-    prepare_key(key);
-    puts(key);
-    encrypt(data, key);
-    puts(data);
-    decrypt(data, key);
-    puts(data);
+    char format_string[] = "#####";
+    char digit_string[] = "123";
+
+    format(format_string, digit_string);
+    puts(format_string);
 
     return 0;
 }
