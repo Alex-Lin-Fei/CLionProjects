@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lilin/CLionProjects/PointsOnC/chapter12/dll_node.h
+stdbool.h
+-
+
+/home/lilin/CLionProjects/PointsOnC/chapter12/main.c
+stdio.h
+-
+malloc.h
+-
+dll_node.h
+/home/lilin/CLionProjects/PointsOnC/chapter12/dll_node.h
+

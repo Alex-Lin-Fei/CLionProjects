@@ -142,6 +142,33 @@ chapter12/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chapter12.dir/build.make CMakeFiles/chapter12.dir/build
 .PHONY : chapter12/fast
 
+dll_node.o: dll_node.c.o
+
+.PHONY : dll_node.o
+
+# target to build an object file
+dll_node.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chapter12.dir/build.make CMakeFiles/chapter12.dir/dll_node.c.o
+.PHONY : dll_node.c.o
+
+dll_node.i: dll_node.c.i
+
+.PHONY : dll_node.i
+
+# target to preprocess a source file
+dll_node.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chapter12.dir/build.make CMakeFiles/chapter12.dir/dll_node.c.i
+.PHONY : dll_node.c.i
+
+dll_node.s: dll_node.c.s
+
+.PHONY : dll_node.s
+
+# target to generate assembly for a file
+dll_node.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chapter12.dir/build.make CMakeFiles/chapter12.dir/dll_node.c.s
+.PHONY : dll_node.c.s
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -169,6 +196,33 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chapter12.dir/build.make CMakeFiles/chapter12.dir/main.c.s
 .PHONY : main.c.s
 
+sll_node.o: sll_node.c.o
+
+.PHONY : sll_node.o
+
+# target to build an object file
+sll_node.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chapter12.dir/build.make CMakeFiles/chapter12.dir/sll_node.c.o
+.PHONY : sll_node.c.o
+
+sll_node.i: sll_node.c.i
+
+.PHONY : sll_node.i
+
+# target to preprocess a source file
+sll_node.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chapter12.dir/build.make CMakeFiles/chapter12.dir/sll_node.c.i
+.PHONY : sll_node.c.i
+
+sll_node.s: sll_node.c.s
+
+.PHONY : sll_node.s
+
+# target to generate assembly for a file
+sll_node.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chapter12.dir/build.make CMakeFiles/chapter12.dir/sll_node.c.s
+.PHONY : sll_node.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -178,9 +232,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... chapter12"
+	@echo "... dll_node.o"
+	@echo "... dll_node.i"
+	@echo "... dll_node.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... sll_node.o"
+	@echo "... sll_node.i"
+	@echo "... sll_node.s"
 .PHONY : help
 
 

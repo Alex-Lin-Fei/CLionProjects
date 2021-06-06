@@ -1,1 +1,1 @@
-/usr/bin/cc -g CMakeFiles/chapter12.dir/main.c.o -o chapter12 
+/usr/bin/cc -g CMakeFiles/chapter12.dir/main.c.o CMakeFiles/chapter12.dir/sll_node.c.o CMakeFiles/chapter12.dir/dll_node.c.o -o chapter12 

@@ -78,7 +78,19 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/lilin/CLionProjects/PointsOnC/chapter12/dll_node.c">
+			<Option target="chapter12"/>
+		</Unit>
+		<Unit filename="/home/lilin/CLionProjects/PointsOnC/chapter12/dll_node.h">
+			<Option target="chapter12"/>
+		</Unit>
 		<Unit filename="/home/lilin/CLionProjects/PointsOnC/chapter12/main.c">
+			<Option target="chapter12"/>
+		</Unit>
+		<Unit filename="/home/lilin/CLionProjects/PointsOnC/chapter12/sll_node.c">
+			<Option target="chapter12"/>
+		</Unit>
+		<Unit filename="/home/lilin/CLionProjects/PointsOnC/chapter12/sll_node.h">
 			<Option target="chapter12"/>
 		</Unit>
 		<Unit filename="/home/lilin/CLionProjects/PointsOnC/chapter12/CMakeLists.txt">

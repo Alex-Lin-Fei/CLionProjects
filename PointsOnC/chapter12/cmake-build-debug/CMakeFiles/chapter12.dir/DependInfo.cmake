@@ -4,7 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/lilin/CLionProjects/PointsOnC/chapter12/dll_node.c" "/home/lilin/CLionProjects/PointsOnC/chapter12/cmake-build-debug/CMakeFiles/chapter12.dir/dll_node.c.o"
   "/home/lilin/CLionProjects/PointsOnC/chapter12/main.c" "/home/lilin/CLionProjects/PointsOnC/chapter12/cmake-build-debug/CMakeFiles/chapter12.dir/main.c.o"
+  "/home/lilin/CLionProjects/PointsOnC/chapter12/sll_node.c" "/home/lilin/CLionProjects/PointsOnC/chapter12/cmake-build-debug/CMakeFiles/chapter12.dir/sll_node.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

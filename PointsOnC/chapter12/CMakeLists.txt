@@ -3,4 +3,4 @@ project(chapter12 C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(chapter12 main.c)
+add_executable(chapter12 main.c sll_node.h dll_node.h sll_node.c dll_node.c)
