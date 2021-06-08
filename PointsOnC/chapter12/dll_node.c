@@ -6,6 +6,7 @@
 #include <malloc.h>
 #include "dll_node.h"
 
+
 bool dll_insert(register Node * rootp, int value) {
     Node *this;
     Node *next;
