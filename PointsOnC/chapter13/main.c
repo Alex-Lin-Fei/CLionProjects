@@ -76,6 +76,5 @@ void printChar() {
 }
 
 int main() {
-
     return 0;
 }
